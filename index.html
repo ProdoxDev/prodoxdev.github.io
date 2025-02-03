@@ -143,7 +143,29 @@
 <body>
     <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXAzNDduNmZnYTB6dDk3cWFycXVuc2lvMTF5OG81NnhmM3FvYzh4YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/kf3EjrAsKp3P9bhYHG/giphy.gif" class="header-gif" alt="Cute Valentine GIF">
     <h1 class="question">Will you be my Valentine? 🌸💘</h1>
-    
+    <style>
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .question {
+        color: #ffffff;
+        font-size: 2.8em;
+        text-shadow: 2px 2px #ff80bf;
+        margin: 15px 0;
+        text-align: center;
+        letter-spacing: 1px;
+        padding: 0 20px;
+        display: inline-block;
+        animation: bounce 1s infinite;
+    }
+</style>
+
     <div class="buttons">
         <button id="yesBtn">YES! 😍🎀</button>
         <button id="noBtn">no. 🕸🧹</button>
@@ -220,7 +242,6 @@
                     noBtn.style.transform = 'scale(1) rotate(0deg)';
                 }, 200);
             });
-
             document.addEventListener('contextmenu', (e) => e.preventDefault());
         });
     </script>
@@ -233,16 +254,13 @@
         const backgroundMusic = document.getElementById('backgroundMusic');
         let fadeInterval;
 
-        // Setup looping
         backgroundMusic.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
         });
 
-        // Initial fade-in
         backgroundMusic.volume = 0;
         backgroundMusic.play().catch(() => {
-            // Handle autoplay restrictions
             document.addEventListener('click', () => {
                 backgroundMusic.play();
             }, { once: true });
@@ -256,7 +274,6 @@
             }
         }, 100);
 
-        // Yes button click handler
         yesBtn.addEventListener('click', () => {
             clearInterval(fadeInterval);
             fadeInterval = setInterval(() => {
