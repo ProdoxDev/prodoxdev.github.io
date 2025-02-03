@@ -224,5 +224,47 @@
             document.addEventListener('contextmenu', (e) => e.preventDefault());
         });
     </script>
+   <audio id="backgroundMusic" loop>
+    <source src="https://drive.google.com/uc?export=download&id=1A1pF8IPI8iQ7prnBiCTLj58wcQV0yJzq" type="audio/mpeg">
+</audio>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        let fadeInterval;
+
+        // Setup looping
+        backgroundMusic.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        });
+
+        // Initial fade-in
+        backgroundMusic.volume = 0;
+        backgroundMusic.play().catch(() => {
+            // Handle autoplay restrictions
+            document.addEventListener('click', () => {
+                backgroundMusic.play();
+            }, { once: true });
+        });
+        
+        fadeInterval = setInterval(() => {
+            if(backgroundMusic.volume < 0.5) {
+                backgroundMusic.volume += 0.02;
+            } else {
+                clearInterval(fadeInterval);
+            }
+        }, 100);
+
+        // Yes button click handler
+        yesBtn.addEventListener('click', () => {
+            clearInterval(fadeInterval);
+            fadeInterval = setInterval(() => {
+                if(backgroundMusic.volume < 1) {
+                    backgroundMusic.volume += 0.05;
+                } else {
+                    clearInterval(fadeInterval);
+                }
+            }, 50);
 </body>
 </html>
