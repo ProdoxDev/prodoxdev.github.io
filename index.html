@@ -142,16 +142,38 @@
 </head>
 <body>
     <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXAzNDduNmZnYTB6dDk3cWFycXVuc2lvMTF5OG81NnhmM3FvYzh4YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/kf3EjrAsKp3P9bhYHG/giphy.gif" class="header-gif" alt="Cute Valentine GIF">
-    <h1 class="question">Will you be my Valentine? 🌸💘</h1>
-    
+    <h1 class="question">Will you be my Valentine? 🌷💗</h1>
+    <style>
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .question {
+        color: #ffffff;
+        font-size: 2.8em;
+        text-shadow: 2px 2px #ff80bf;
+        margin: 15px 0;
+        text-align: center;
+        letter-spacing: 1px;
+        padding: 0 20px;
+        display: inline-block;
+        animation: bounce 1s infinite;
+    }
+</style>
+
     <div class="buttons">
         <button id="yesBtn">YES! 😍🎀</button>
         <button id="noBtn">no. 🕸🧹</button>
     </div>
 
     <div id="success">
-        <div class="success-text">YAY!I LOVE YOU ANGIE!!🎉💞💞💞</div>
-        <img src="https://cdn.discordapp.com/attachments/882744661926612992/1336062948417867898/hug-love.gif" class="success-gif" alt="Celebration GIF">
+        <div class="success-text">YAY! I LOVE YOU ANGIE!!🎉💗💖💝</div>
+        <img src="https://cdn.discordapp.com/attachments/1118174336587681853/1338171556022718545/Lva75NX.gif?ex=67aa1ce0&is=67a8cb60&hm=7a30f8fdfa33ab661e337428dd6a2dd719d4043ad5eecc5e088a41b1994a9ef2&" class="success-gif" alt="Celebration GIF">
     </div>
 
     <script>
@@ -220,9 +242,47 @@
                     noBtn.style.transform = 'scale(1) rotate(0deg)';
                 }, 200);
             });
-
             document.addEventListener('contextmenu', (e) => e.preventDefault());
         });
     </script>
+   <audio id="backgroundMusic" loop>
+    <source src="https://drive.google.com/uc?export=download&id=1A1pF8IPI8iQ7prnBiCTLj58wcQV0yJzq" type="audio/mpeg">
+</audio>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        let fadeInterval;
+
+        backgroundMusic.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        });
+
+        backgroundMusic.volume = 0;
+        backgroundMusic.play().catch(() => {
+            document.addEventListener('click', () => {
+                backgroundMusic.play();
+            }, { once: true });
+        });
+        
+        fadeInterval = setInterval(() => {
+            if(backgroundMusic.volume < 0.5) {
+                backgroundMusic.volume += 0.02;
+            } else {
+                clearInterval(fadeInterval);
+            }
+        }, 100);
+
+        yesBtn.addEventListener('click', () => {
+            clearInterval(fadeInterval);
+            fadeInterval = setInterval(() => {
+                if(backgroundMusic.volume < 1) {
+                    backgroundMusic.volume += 0.05;
+                } else {
+                    clearInterval(fadeInterval);
+                }
+            }, 50);
+
 </body>
 </html>
